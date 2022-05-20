@@ -1,13 +1,14 @@
+--// Destroy other instances
 for _,v in pairs(game.CoreGui:GetChildren()) do
-    if v.Name == "ZMK_WARE" then
+    if v.Name == "zmklib" then
         v:Destroy()
     end
 end
 
-local ZMK_WARE = Instance.new("ScreenGui")
-ZMK_WARE.Name = "ZMK_WARE"
-ZMK_WARE.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-ZMK_WARE.Parent = game.CoreGui
+local zmklib = Instance.new("ScreenGui")
+zmklib.Name = "zmklib"
+zmklib.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+zmklib.Parent = game.CoreGui
 
 local Library = {}
 local TweenService = game:GetService("TweenService")
@@ -79,10 +80,10 @@ function Library:Create(table)
     shadow.Selectable = true
     shadow.Size = UDim2.fromOffset(529, 331)
     shadow.ZIndex = -1
-    shadow.Parent = ZMK_WARE
+    shadow.Parent = zmklib
 
     tabContainer.Parent = main
-    main.Parent = ZMK_WARE
+    main.Parent = zmklib
     main.AnchorPoint = Vector2.new(0.5,0.5)
     shadow.AnchorPoint = Vector2.new(0.5,0.5)
 
@@ -92,7 +93,7 @@ function Library:Create(table)
     local tabHandler = {}
 
     function tabHandler:Exit()
-        ZMK_WARE:Destroy()
+        zmklib:Destroy()
     end
 
     function tabHandler:Tab(name)
@@ -157,12 +158,12 @@ function Library:Create(table)
 
         --// Event
         main1.MouseButton1Click:Connect(function()
-            for _,v in pairs(game.CoreGui:FindFirstChild('ZMK_WARE').main:GetChildren()) do
+            for _,v in pairs(game.CoreGui:FindFirstChild('zmklib').main:GetChildren()) do
                 if v.Name == "container" then
                     v.Visible = false
                 end
             end
-            for _,v in pairs(game.CoreGui['ZMK_WARE'].main.tabContainer:GetChildren()) do
+            for _,v in pairs(game.CoreGui['zmklib'].main.tabContainer:GetChildren()) do
                 if v:IsA('TextButton') then
                     game:GetService('TweenService'):Create(v, TweenInfo.new(0.3), {TextTransparency = 0.5}):Play()
                 end
@@ -503,7 +504,7 @@ function Library:Create(table)
             if Key.UserInputType == Enum.UserInputType.MouseButton1 then
                 local ObjectPosition = Vector2.new(Mouse.X - main.AbsolutePosition.X, Mouse.Y - main.AbsolutePosition.Y)
                 while RunService.RenderStepped:wait() and UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
-                    local FrameX, FrameY = math.clamp(Mouse.X - ObjectPosition.X, 0, ZMK_WARE.AbsoluteSize.X - main.AbsoluteSize.X), math.clamp(Mouse.Y - ObjectPosition.Y, 0, ZMK_WARE.AbsoluteSize.Y - main.AbsoluteSize.Y)
+                    local FrameX, FrameY = math.clamp(Mouse.X - ObjectPosition.X, 0, zmklib.AbsoluteSize.X - main.AbsoluteSize.X), math.clamp(Mouse.Y - ObjectPosition.Y, 0, zmklib.AbsoluteSize.Y - main.AbsoluteSize.Y)
                     game:GetService('TweenService'):Create(main, TweenInfo.new(0.1), {Position = UDim2.fromOffset(FrameX + (main.Size.X.Offset * main.AnchorPoint.X), FrameY + (main.Size.Y.Offset * main.AnchorPoint.Y))}):Play()
                     game:GetService('TweenService'):Create(shadow, TweenInfo.new(0.1), {Position = UDim2.fromOffset(FrameX + (main.Size.X.Offset * main.AnchorPoint.X), FrameY + (main.Size.Y.Offset * main.AnchorPoint.Y))}):Play()
                 end
@@ -512,12 +513,12 @@ function Library:Create(table)
     end)
 
     --// Make the first tab visible
-    game.CoreGui['ZMK_WARE'].main.tabContainer.ChildAdded:Connect(function()
-        game.CoreGui['ZMK_WARE'].main:FindFirstChild('container').Visible = true
+    game.CoreGui['zmklib'].main.tabContainer.ChildAdded:Connect(function()
+        game.CoreGui['zmklib'].main:FindFirstChild('container').Visible = true
         pcall(function()
-            repeat wait() until game.CoreGui['ZMK_WARE'].main:FindFirstChild('tabContainer'):FindFirstChildWhichIsA('TextButton')
+            repeat wait() until game.CoreGui['zmklib'].main:FindFirstChild('tabContainer'):FindFirstChildWhichIsA('TextButton')
         end)
-        game:GetService('TweenService'):Create(game.CoreGui['ZMK_WARE'].main:FindFirstChild('tabContainer'):FindFirstChildWhichIsA('TextButton'), TweenInfo.new(0.3), {TextTransparency = 0}):Play()
+        game:GetService('TweenService'):Create(game.CoreGui['zmklib'].main:FindFirstChild('tabContainer'):FindFirstChildWhichIsA('TextButton'), TweenInfo.new(0.3), {TextTransparency = 0}):Play()
     end)
 
     spawn(function()
