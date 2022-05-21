@@ -61,12 +61,12 @@ local notifications = {
 	theme = "dark",
 	colorSchemes = {
 		dark = {
-			Main = Color3.fromRGB(40, 40, 45),
+			Main = Color3.fromRGB(21, 21, 21),
 			Secondary = Color3.fromRGB(30, 30, 35),
 			Icon = Color3.fromRGB(255, 255, 255),
 			Text = Color3.fromRGB(255, 255, 255),
 			SecondaryText = Color3.fromRGB(200, 200, 200),
-			Accept = Color3.fromRGB(60, 40, 200),
+			Accept = Color3.fromRGB(21, 21, 21),
 			Dismiss = Color3.fromRGB(60, 60, 65)
 		}
 	},
